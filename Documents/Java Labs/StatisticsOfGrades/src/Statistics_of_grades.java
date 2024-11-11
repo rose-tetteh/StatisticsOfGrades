@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Statistics_of_grades {
 
     static Scanner scanner = new Scanner(System.in);
-    private static int input;
 
     /**
      * Check range int.
@@ -68,7 +67,7 @@ public class Statistics_of_grades {
 
     /**
      * Validation int.
-     *
+     * Check to make sure the input value is an integer
      * @return the int
      */
     public static int validation(){
@@ -81,7 +80,8 @@ public class Statistics_of_grades {
 
     /**
      * Take values int [ ].
-     *
+     * Compliments the takeArrayValues method,
+     * to make sure the number of input values is equal to the array size.
      * @param size the size
      * @return the int [ ]
      */
@@ -127,7 +127,6 @@ public class Statistics_of_grades {
         int [] stats = new int[5];
 
 //      Loop through scores array and group the scores in the 4 score ranges
-
         for( int grade : scores)
             switch (checkRange(grade)){
                 case 10,9 -> stats[4]++;
