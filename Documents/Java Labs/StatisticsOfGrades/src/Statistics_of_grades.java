@@ -25,9 +25,8 @@ public class Statistics_of_grades {
      * Draw graph string.
      *
      * @param array the array
-     * @return the string
      */
-    public static String drawGraph(int[] array){
+    public static void drawGraph(int[] array){
         int maxCount = 0;
         for (int count : array){
             if(count > maxCount){
@@ -50,17 +49,14 @@ public class Statistics_of_grades {
 //     Printing the horizontal axis
         System.out.println("   +-----------+-------------+-------------+-------------+-------------+");
         System.out.println("   I    0-20   I     21-40   I     41-60   I     61-80   I     81-100  I");
-
-        return "";
     }
 
     /**
      * Calculations string.
      * Calculate the minimum, maximum and average grades using streams in arrays
      * @param array the array
-     * @return the string
      */
-    public static String calculations(int[] array){
+    public static void calculations(int[] array){
         int minGrade = Arrays.stream(array).min().getAsInt();
         int maxGrade = Arrays.stream(array).max().getAsInt();
         double avgGrade = Arrays.stream(array).average().getAsDouble();
@@ -68,8 +64,6 @@ public class Statistics_of_grades {
         System.out.println("\nThe maximum grade is " + maxGrade);
         System.out.println("The minimum grade is " + minGrade);
         System.out.println("The average grade is " + avgGrade + "\n");
-
-        return "";
     }
 
     /**
@@ -88,32 +82,46 @@ public class Statistics_of_grades {
     /**
      * Take values int [ ].
      *
+     * @param size the size
+     * @return the int [ ]
+     */
+    public static int[] takeValues(int size){
+        int[] scores = new int[size];
+        System.out.printf("Enter "+ size + "students' scores Note: any extra score will not be considered: \n");
+        for (int i = 0; i <= size; i++) {
+            scores[i] = validation();
+        }
+        return scores;
+    }
+
+    /**
+     * Take values int [ ].
+     *
      * @param arraySize the array size
      * @return the int [ ]
      */
     public static int [] takeArrayValues(int arraySize){
         int[] scores = new int[arraySize];
         try{
-            System.out.println("Enter students' scores");
+            System.out.printf("Enter "+ arraySize + "students' scores Note: any extra score will not be considered: \n");
             for (int i = 0; i <= arraySize; i++) {
                 scores[i] = validation();
             }
         } catch (Exception e){
             System.out.println("The number of values entered is more than the number of scores given! ");
-            takeArrayValues(arraySize);
+            scores = takeValues(arraySize);
         }
         return scores;
     }
 
     public static void main(String[] args) {
 //      Allow the user to enter the size of the array
-        int arraySize = 0;
         System.out.println("Enter the number of students' scores you want to work with: ");
-        arraySize = validation();
+        int arraySize = validation();
 
         int[] scores = takeArrayValues(arraySize);
 
-        System.out.println(calculations(scores));
+        calculations(scores);
 
 //      Declare stats array
         int [] stats = new int[5];
@@ -128,7 +136,8 @@ public class Statistics_of_grades {
                 case 4,3 -> stats[1]++;
                 default -> stats[0]++;
             }
-        System.out.println(drawGraph(stats));
+
+        drawGraph(stats);
 
 
     }
